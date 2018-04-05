@@ -1,0 +1,21 @@
+{
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-danger": "off",
+    "class-methods-use-this": "off",
+    "arrow-body-style": "off"
+  }
+}
