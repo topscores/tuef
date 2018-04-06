@@ -27,7 +27,7 @@ export default class Field {
     if (!isType(spec.type, this.val)) {
       throw new TypeError(
         `${spec.name} must be ${spec.type}` +
-          `, Field data = ${util.inspect(this.data)}`
+          `, Field val = ${util.inspect(this.val)}`
       )
     }
 
