@@ -6,6 +6,7 @@ export default class Segment {
     if (
       typeof spec === 'undefined' ||
       typeof spec.fieldSpecs === 'undefined' ||
+      // Default lengthType for field that does not specified lengthType
       typeof spec.lengthType === 'undefined'
     ) {
       throw new Error(
@@ -75,7 +76,8 @@ export default class Segment {
           }
         }
         const field = new Field(fieldSpec, mappedVal)
-        return field.toString(this.lengthType)
+        // If length type is specified on fieldSpec, use that one instead of the one in spec
+        return field.toString(fieldSpec.lengthType || this.lengthType)
       })
       .reduce((result, fieldStr) => `${result}${fieldStr}`)
   }

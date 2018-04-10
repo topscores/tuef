@@ -1,6 +1,6 @@
 import util from 'util'
 import { isType } from './isType'
-import { isValueAvailable, lpad, rpad, truncate, yyyymmdd } from './utils'
+import { isValueAvailable, lpad, rpad, truncate } from './utils'
 
 export default class Field {
   constructor(spec, val, defaultVal) {
@@ -10,7 +10,7 @@ export default class Field {
 
   toString(lengthType = 'vary') {
     let result
-    const spec = this.spec
+    const { spec } = this
     // Check for blank field
     if (!isValueAvailable(this.val) || this.val === '') {
       // Required field cannot be blank
