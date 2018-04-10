@@ -1,7 +1,7 @@
 {
   "name": "tuef",
-  "version": "1.0.3",
-  "main": "index.js",
+  "version": "1.0.4",
+  "main": "./dist/tuef.js",
   "repository": "git@github.com:topscores/tuef.git",
   "author": "Arnupharp Viratanapanu <arnupharp@larngeartech.com>",
   "license": "MIT",
