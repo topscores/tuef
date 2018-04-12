@@ -75,7 +75,6 @@ describe('parseTuef', () => {
       expect(obj).toEqual({ fieldA: 3, fieldB: 'Hell' })
       expect(parsedChar).toEqual(20)
     })
-
     it('Parses vary length segment with optional fields', () => {
       const spec = {
         lengthType: 'vary',
