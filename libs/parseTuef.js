@@ -1,3 +1,5 @@
+import iconv from 'iconv-lite'
+import util from 'util'
 import { isType } from './isType'
 
 export const parseFixedLengthSegment = (spec, str) => {
@@ -24,6 +26,14 @@ export const parseVaryLengthSegment = (spec, str) => {
   let parsedChar = 0
 
   spec.fieldSpecs.forEach(fieldSpec => {
+    // Tag property is required for variable length field
+    if (typeof fieldSpec.tag === 'undefined') {
+      throw Error(
+        `Expect property tag on variable length fieldSpec, spec = ${util.inspect(
+          spec
+        )} fieldSpec = ${util.inspect(fieldSpec)}`
+      )
+    }
     // Tag must be 2 characters
     const tag = str.substr(parsedChar, 2)
     // This is not this tag fieldSpec dont process
@@ -34,10 +44,18 @@ export const parseVaryLengthSegment = (spec, str) => {
 
     // Length must be 2 character
     const length = parseInt(str.substr(parsedChar, 2), 10)
+    if (Number.isNaN(length)) {
+      throw Error(
+        `Error parsing field ${
+          fieldSpec.name
+        }, length must be string but got ${str.substr(parsedChar, 2)}`
+      )
+    }
     parsedChar += 2
 
     // Extract field value
-    const fieldVal = str.substr(parsedChar, length)
+    const buffer = Buffer.from(str.substr(parsedChar, length), 'latin1')
+    const fieldVal = iconv.decode(buffer, 'win874')
     parsedChar += length
 
     if (isType(fieldSpec.type, fieldVal)) {
