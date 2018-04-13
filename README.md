@@ -62,3 +62,11 @@ const data = {
   f1: 5,
 }
 ```
+
+## Parsing TUEF string
+
+Coming soon
+
+## Convert an object to TUEF string
+
+Coming soon
