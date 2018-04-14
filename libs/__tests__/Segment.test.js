@@ -140,34 +140,6 @@ describe('Segment', () => {
       const fixedSegment = new Segment(spec, data)
       expect(fixedSegment.toString()).toEqual('TEST      00005')
     })
-    it('Gives fieldSpec.lengthType higher priority than spec.lengthType', () => {
-      const spec = {
-        lengthType: 'vary',
-        fieldSpecs: [
-          { name: 'field1', tag: 'f1', type: 'A', length: 10, val: 'test' },
-          {
-            name: 'field2',
-            tag: 'f2',
-            lengthType: 'fixed',
-            type: 'N',
-            length: 5,
-            // Both val and mapKey is available here
-            // toString must use 5 from fieldSpec.val not 10 from data[fieldSpec.mapKey]
-            val: '5',
-            mapKey: 'p1',
-            mapFunc: val => val * 10,
-          },
-        ],
-      }
-      const data = { p1: '10' }
-      // Variable length segment
-      const segment = new Segment(spec, data)
-      expect(segment.toString()).toEqual('f110TEST      00005')
-      // Fixed length segment
-      spec.lengthType = 'fixed'
-      const fixedSegment = new Segment(spec, data)
-      expect(fixedSegment.toString()).toEqual('TEST      00005')
-    })
     it('Converts using data[fieldSpec.mapKey]', () => {
       const spec = {
         lengthType: 'vary',

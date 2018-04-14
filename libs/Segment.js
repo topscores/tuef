@@ -76,8 +76,8 @@ export default class Segment {
           }
         }
         const field = new Field(fieldSpec, mappedVal)
-        // If length type is specified on fieldSpec, use that one instead of the one in spec
-        return field.toString(fieldSpec.lengthType || this.lengthType)
+
+        return field.toString(this.lengthType)
       })
       .reduce((result, fieldStr) => `${result}${fieldStr}`)
   }
