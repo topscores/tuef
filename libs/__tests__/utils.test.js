@@ -89,9 +89,9 @@ describe('utils', () => {
   })
   describe('toWin874', () => {
     it('Convert characters to latin1 encoding with win874 charset', () => {
-      const str = 'test ·´ÊÍº'
+      const str = 'test ทดสอบ'
       const win874 = toWin874(str)
-      expect(win874).toEqual('·´ÊÍº')
+      expect(win874).toEqual('test ·´ÊÍº')
     })
   })
 })
