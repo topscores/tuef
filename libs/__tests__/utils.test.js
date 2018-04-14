@@ -5,6 +5,7 @@ import {
   rpad,
   truncate,
   yyyymmdd,
+  toWin874,
 } from '../utils'
 
 describe('utils', () => {
@@ -84,6 +85,13 @@ describe('utils', () => {
       const dateStr = '2016-8-1'
       expect(yyyymmdd.bind(null, dateStr)).toThrow(TypeError)
       expect(yyyymmdd.bind(null, new Date('abc'))).toThrow(TypeError)
+    })
+  })
+  describe('toWin874', () => {
+    it('Convert characters to latin1 encoding with win874 charset', () => {
+      const str = 'test ·´ÊÍº'
+      const win874 = toWin874(str)
+      expect(win874).toEqual('·´ÊÍº')
     })
   })
 })

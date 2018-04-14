@@ -1,3 +1,5 @@
+import iconv from 'iconv-lite'
+
 export const lpad = (val, length, padStr = ' ') => {
   let result = val.toString()
   while (result.length < length) {
@@ -44,4 +46,11 @@ export const yyyymmdd = date => {
 
 export const isValueAvailable = val => {
   return val !== undefined && val !== null
+}
+
+// Convert utf8 string to latin1 encoding with win874 charset
+export const toWin874 = str => {
+  const win874 = iconv.encode(str, 'win874')
+  const buffer = Buffer.from(win874)
+  return buffer.toString('latin1')
 }
