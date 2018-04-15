@@ -7,7 +7,11 @@ export const parseFixedLengthSegment = (spec, str) => {
   let parsedChar = 0
 
   spec.fieldSpecs.forEach(fieldSpec => {
-    const fieldVal = str.substr(parsedChar, fieldSpec.length)
+    const buffer = Buffer.from(
+      str.substr(parsedChar, fieldSpec.length),
+      'latin1'
+    )
+    const fieldVal = iconv.decode(buffer, 'win874')
     if (isType(fieldSpec.type, fieldVal)) {
       obj[fieldSpec.name] =
         fieldSpec.type === 'N' ? parseInt(fieldVal, 10) : fieldVal.trim()
