@@ -216,7 +216,7 @@ describe('parseTuef', () => {
           },
         ],
       },
-      name: {
+      PN: {
         lengthType: 'vary',
         fieldSpecs: [
           {
@@ -309,6 +309,16 @@ describe('parseTuef', () => {
     const str =
       'TUEF14                         THCC160280011493566856PN03N010105·´ÊÍº0406ÊÁÁØµÔ070825110515080121401YID03'
     const expected = {
+      PN: [
+        {
+          consentToEnquire: 'Y',
+          dateOfBirth: 25110515,
+          firstName: 'สมมุติ',
+          gender: 2,
+          lastName1: 'ทดสอบ',
+          segmentTag: 'N01',
+        },
+      ],
       header: {
         country: 'TH',
         enquiryControlNumber: 493566856,
@@ -317,14 +327,6 @@ describe('parseTuef', () => {
         segmentTag: 'TUEF',
         subjectReferenceCode: 1,
         version: 14,
-      },
-      name: {
-        consentToEnquire: 'Y',
-        dateOfBirth: 25110515,
-        firstName: 'สมมุติ',
-        gender: 2,
-        lastName1: 'ทดสอบ',
-        segmentTag: 'N01',
       },
     }
     expect(parseTuef(spec, str)).toEqual(expected)

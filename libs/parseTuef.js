@@ -77,15 +77,32 @@ export const parseTuefSegment = (spec, str) => {
 }
 export const parseTuef = (spec, str) => {
   let parsedChar = 0
+
+  // Parse header
+  const header = str.substr(parsedChar, 53)
+  const parsedHeader = parseFixedLengthSegment(spec.header, header)
+  parsedChar += 53
+
+  // Parse body
   const segmentNames = Object.keys(spec)
-  return Object.values(spec)
-    .map(segmentSpec => {
-      const parsed = parseTuefSegment(segmentSpec, str.substr(parsedChar))
-      parsedChar += parsed.parsedChar
-      return parsed.obj
+  const parsed = Object.values(spec)
+    .map((segmentSpec, idx) => {
+      const response = []
+      // First two character of segment is segment tag
+      let tag = str.substr(parsedChar, 2)
+      while (tag === segmentNames[idx]) {
+        const parsed = parseTuefSegment(segmentSpec, str.substr(parsedChar))
+        parsedChar += parsed.parsedChar
+        response.push(parsed.obj)
+        tag = str.substr(parsedChar, 2)
+      }
+      return response
     })
     .reduce((response, parsedSpec, idx) => {
       response[segmentNames[idx]] = parsedSpec
       return response
     }, {})
+  parsed.header = parsedHeader.obj
+
+  return parsed
 }
