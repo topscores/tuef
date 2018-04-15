@@ -11,14 +11,17 @@ describe('isType', () => {
       expect(isType('A', 'สินค้า')).toEqual(true)
       expect(isType('A', 'ดินแดงๆ')).toEqual(true)
     })
-    it('accept space', () => {
+    it('accept some special characters', () => {
       expect(isType('A', ' ')).toEqual(true)
+      expect(isType('A', '-')).toEqual(true)
+      expect(isType('A', '_')).toEqual(true)
+      expect(isType('A', '/')).toEqual(true)
     })
-    it('reject special character', () => {
+    it('reject other special characters', () => {
       expect(isType('A', 'CCC*')).toEqual(false)
       expect(isType('A', '&CCC')).toEqual(false)
       expect(isType('A', '(CCC')).toEqual(false)
-      expect(isType('A', '/*^')).toEqual(false)
+      expect(isType('A', '/*^)')).toEqual(false)
     })
     it('reject 0-9', () => {
       expect(isType('A', 'A09')).toEqual(false)
@@ -72,6 +75,12 @@ describe('isType', () => {
     it('accept thai alphabet', () => {
       expect(isType('AN', 'สินค้า')).toEqual(true)
       expect(isType('AN', 'ดินแดงๆ')).toEqual(true)
+    })
+    it('accept some special characters', () => {
+      expect(isType('AN', ' ')).toEqual(true)
+      expect(isType('AN', '-')).toEqual(true)
+      expect(isType('AN', '_')).toEqual(true)
+      expect(isType('AN', '/')).toEqual(true)
     })
     it('reject special character', () => {
       expect(isType('AN', 'CCC*')).toEqual(false)

@@ -1,5 +1,5 @@
 const isAlphabetic = value => {
-  return /^[-_a-zก-์ ]+$/i.test(value)
+  return /^[-_/a-zก-์ ]+$/i.test(value)
 }
 
 const isNumeric = value => {
@@ -7,7 +7,7 @@ const isNumeric = value => {
 }
 
 const isAlphaNumeric = value => {
-  return /^[-_a-zก-์0-9 ]+$/i.test(value)
+  return /^[-_/a-zก-์0-9 ]+$/i.test(value)
 }
 
 const isPrintable = () => {
