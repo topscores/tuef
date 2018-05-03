@@ -6,6 +6,7 @@ import {
   truncate,
   yyyymmdd,
   toWin874,
+  isArray,
 } from '../utils'
 
 describe('utils', () => {
@@ -25,6 +26,24 @@ describe('utils', () => {
     })
     it('return false for null', () => {
       expect(isValueAvailable(null)).toEqual(false)
+    })
+  })
+  describe('isArray', () => {
+    it('Returns true if val is an empty array', () => {
+      const arr = []
+      expect(isArray(arr)).toEqual(true)
+    })
+    it('Returns true if val is an array', () => {
+      const arr = [1, 2, 3]
+      expect(isArray(arr)).toEqual(true)
+    })
+    it('Return false if val is not an array', () => {
+      const notarr = 'hahahaha'
+      expect(isArray(notarr)).toEqual(false)
+    })
+    it('Return false if val is undefined', () => {
+      const obj = {}
+      expect(isArray(obj.notarr)).toEqual(false)
     })
   })
   describe('lpad', () => {

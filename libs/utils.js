@@ -47,7 +47,9 @@ export const yyyymmdd = date => {
 export const isValueAvailable = val => {
   return val !== undefined && val !== null
 }
-
+export const isArray = val => {
+  return typeof val !== 'undefined' && val.constructor === Array
+}
 // Convert utf8 string to latin1 encoding with win874 charset
 export const toWin874 = str => {
   const win874 = iconv.encode(str, 'win874')
