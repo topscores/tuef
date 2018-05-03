@@ -33,7 +33,25 @@ const spec = {
 }
 ```
 
-3.  Using mapKey to map value from data object instead of fieldSpec.val
+3.  Nested segment spec
+
+```
+const spec = {
+  lengthType: 'vary',
+  fieldSpecs: [
+    { name: 'field1', tag: 'T01', type: 'N', mapKey: f1, mapFunc: val => val* 10, length: 10, required: true }, // Field field1 is a require field
+    { name: 'field2', tag: 'T02', type: 'A', val: 10, length: 10 }, // Field field2 is an optional field
+  ],
+  childSegment: {
+    child1: {
+      lengthType: '...',
+      fieldSpecs: [...],
+    }
+  }
+}
+```
+
+4.  Using mapKey to map value from data object instead of fieldSpec.val
 
 ```
 const spec = {
@@ -48,7 +66,7 @@ const data = {
 }
 ```
 
-4.  Using mapFunc to map data[fieldSpec.mapKey] to other value
+5.  Using mapFunc to map data[fieldSpec.mapKey] to other value
 
 ```
 const spec = {

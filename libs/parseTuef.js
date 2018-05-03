@@ -75,9 +75,39 @@ export const parseVaryLengthSegment = (spec, str) => {
   return { obj, parsedChar }
 }
 export const parseTuefSegment = (spec, str) => {
-  return spec.lengthType === 'fixed'
-    ? parseFixedLengthSegment(spec, str)
-    : parseVaryLengthSegment(spec, str)
+  let segment
+  if (spec.lengthType === 'fixed') {
+    segment = parseFixedLengthSegment(spec, str)
+  } else {
+    segment = parseVaryLengthSegment(spec, str)
+  }
+  // If segment has subfield
+  if (typeof spec.childSegment !== 'undefined') {
+    let { parsedChar } = segment
+    const childSegmentNames = Object.keys(spec.childSegment)
+    segment.obj.childSegment = Object.values(spec.childSegment)
+      .map((childSegmentSpec, idx) => {
+        const response = []
+        // First two character of segment is segment tag
+        let tag = str.substr(parsedChar, 2)
+        while (tag === childSegmentNames[idx]) {
+          const parsedSegment = parseTuefSegment(
+            childSegmentSpec,
+            str.substr(parsedChar)
+          )
+          parsedChar += parsedSegment.parsedChar
+          response.push(parsedSegment.obj)
+          tag = str.substr(parsedChar, 2)
+        }
+        return response
+      })
+      .reduce((response, parsedSegment, idx) => {
+        response[childSegmentNames[idx]] = parsedSegment
+        return response
+      }, {})
+    segment.parsedChar = parsedChar
+  }
+  return segment
 }
 export const parseTuef = (spec, str) => {
   let parsedChar = 0
@@ -105,8 +135,8 @@ export const parseTuef = (spec, str) => {
       }
       return response
     })
-    .reduce((response, parsedSpec, idx) => {
-      response[segmentNames[idx]] = parsedSpec
+    .reduce((response, parsedSegment, idx) => {
+      response[segmentNames[idx]] = parsedSegment
       return response
     }, {})
   parsed.header = parsedHeader.obj
