@@ -95,9 +95,12 @@ export const parseTuef = (spec, str) => {
       // First two character of segment is segment tag
       let tag = str.substr(parsedChar, 2)
       while (tag === segmentNames[idx]) {
-        const parsed = parseTuefSegment(segmentSpec, str.substr(parsedChar))
-        parsedChar += parsed.parsedChar
-        response.push(parsed.obj)
+        const parsedSegment = parseTuefSegment(
+          segmentSpec,
+          str.substr(parsedChar)
+        )
+        parsedChar += parsedSegment.parsedChar
+        response.push(parsedSegment.obj)
         tag = str.substr(parsedChar, 2)
       }
       return response
