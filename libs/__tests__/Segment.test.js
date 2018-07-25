@@ -140,6 +140,26 @@ describe('Segment', () => {
       const fixedSegment = new Segment(spec, data)
       expect(fixedSegment.toString()).toEqual('TEST      00005')
     })
+    it('If val = 0, use val not data[spec.mapKey])', () => {
+      const spec = {
+        lengthType: 'fixed',
+        fieldSpecs: [
+          {
+            name: 'field1',
+            type: 'N',
+            val: 0,
+            mapKey: 'val1', // It should use 0 from val not value from data.val1
+            length: 1,
+            required: true,
+          },
+        ],
+      }
+      const data = {
+        val1: 3,
+      }
+      const segment = new Segment(spec, data)
+      expect(segment.toString()).toEqual('0')
+    })
     it('Converts using data[fieldSpec.mapKey]', () => {
       const spec = {
         lengthType: 'vary',
@@ -186,6 +206,24 @@ describe('Segment', () => {
       spec.lengthType = 'fixed'
       const fixedSegment = new Segment(spec, data)
       expect(fixedSegment.toString()).toEqual('TEST      00100')
+    })
+    it('Support spec.defaultVal', () => {
+      const spec = {
+        lengthType: 'fixed',
+        fieldSpecs: [
+          {
+            name: 'field1',
+            type: 'N',
+            mapKey: 'notExist',
+            defaultVal: 5,
+            length: 1,
+            required: true,
+          },
+        ],
+      }
+      const data = {}
+      const segment = new Segment(spec, data)
+      expect(segment.toString()).toEqual('5')
     })
   })
 })

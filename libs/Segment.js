@@ -1,4 +1,5 @@
 import util from 'util'
+import { isValueAvailable } from './utils'
 import Field from './Field'
 
 export default class Segment {
@@ -38,7 +39,7 @@ export default class Segment {
       .map(fieldSpec => {
         let mappedVal = ''
         // If fieldSpec has val property use it first
-        if (fieldSpec.val) {
+        if (isValueAvailable(fieldSpec.val)) {
           mappedVal = fieldSpec.val
         } else {
           if (!fieldSpec.mapKey) {
@@ -62,7 +63,7 @@ export default class Segment {
       .map(fieldSpec => {
         let mappedVal = ''
         // If fieldSpec has val property use it first
-        if (fieldSpec.val) {
+        if (isValueAvailable(fieldSpec.val)) {
           mappedVal = fieldSpec.val
         } else {
           if (!fieldSpec.mapKey) {
@@ -75,7 +76,7 @@ export default class Segment {
             mappedVal = fieldSpec.mapFunc(mappedVal)
           }
         }
-        const field = new Field(fieldSpec, mappedVal)
+        const field = new Field(fieldSpec, mappedVal, fieldSpec.defaultVal)
 
         return field.toString(this.lengthType)
       })

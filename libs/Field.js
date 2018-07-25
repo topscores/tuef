@@ -5,7 +5,11 @@ import { isValueAvailable, lpad, rpad, truncate, toWin874 } from './utils'
 export default class Field {
   constructor(spec, val, defaultVal) {
     this.spec = spec
-    this.val = val || defaultVal
+    if (isValueAvailable(defaultVal)) {
+      this.val = val || defaultVal
+    } else {
+      this.val = val
+    }
   }
 
   toString(lengthType = 'vary') {

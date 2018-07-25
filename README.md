@@ -81,6 +81,17 @@ const data = {
 }
 ```
 
+6.  Default value
+
+````
+const spec = {
+  lengthType: 'fixed',
+  fieldSpecs: [
+    { name: 'field1', type: 'N', mapKey: 'f1', length: 10, required: true, defaultVal: 5 }, // Field field1 will be 5 if data.f1 not exist
+  ],
+}
+```
+
 ## Parsing TUEF string
 
 Coming soon
@@ -88,3 +99,4 @@ Coming soon
 ## Convert an object to TUEF string
 
 Coming soon
+````

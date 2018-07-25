@@ -27,6 +27,9 @@ describe('utils', () => {
     it('return false for null', () => {
       expect(isValueAvailable(null)).toEqual(false)
     })
+    it('return true for 0', () => {
+      expect(isValueAvailable(0)).toEqual(true)
+    })
   })
   describe('isArray', () => {
     it('Returns true if val is an empty array', () => {
