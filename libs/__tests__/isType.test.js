@@ -16,6 +16,7 @@ describe('isType', () => {
       expect(isType('A', '-')).toEqual(true)
       expect(isType('A', '_')).toEqual(true)
       expect(isType('A', '/')).toEqual(true)
+      expect(isType('A', '.')).toEqual(true)
     })
     it('reject other special characters', () => {
       expect(isType('A', 'CCC*')).toEqual(false)
@@ -81,6 +82,7 @@ describe('isType', () => {
       expect(isType('AN', '-')).toEqual(true)
       expect(isType('AN', '_')).toEqual(true)
       expect(isType('AN', '/')).toEqual(true)
+      expect(isType('AN', '.')).toEqual(true)
     })
     it('reject special character', () => {
       expect(isType('AN', 'CCC*')).toEqual(false)
