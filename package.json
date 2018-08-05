@@ -1,6 +1,6 @@
 {
   "name": "tuef",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "./dist/tuef.js",
   "repository": "git@github.com:topscores/tuef.git",
   "author": "Arnupharp Viratanapanu <arnupharp@larngeartech.com>",

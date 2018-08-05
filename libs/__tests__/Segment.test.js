@@ -1,5 +1,4 @@
 import Segment from '../Segment'
-import { toWin874 } from '../utils'
 
 describe('Segment', () => {
   describe('Validate required spec in constructor', () => {
@@ -159,7 +158,7 @@ describe('Segment', () => {
         val1: 3,
       }
       const segment = new Segment(spec, data)
-      expect(segment.toString()).toEqual(toWin874('0'))
+      expect(segment.toString()).toEqual('0')
     })
     it('Converts using data[fieldSpec.mapKey]', () => {
       const spec = {
@@ -224,7 +223,7 @@ describe('Segment', () => {
       }
       const data = {}
       const segment = new Segment(spec, data)
-      expect(segment.toString()).toEqual(toWin874('5'))
+      expect(segment.toString()).toEqual('5')
     })
   })
 })

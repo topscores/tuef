@@ -1,6 +1,6 @@
 import util from 'util'
 import { isType } from './isType'
-import { isValueAvailable, lpad, rpad, truncate, toWin874 } from './utils'
+import { isValueAvailable, lpad, rpad, truncate } from './utils'
 
 export default class Field {
   constructor(spec, val, defaultVal) {
@@ -74,6 +74,6 @@ export default class Field {
       )
     }
 
-    return toWin874(result)
+    return result
   }
 }

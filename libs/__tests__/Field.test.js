@@ -1,5 +1,4 @@
 import Field from '../Field'
-import { toWin874 } from '../utils'
 
 describe('TUEF Field', () => {
   describe('toString', () => {
@@ -70,7 +69,7 @@ describe('TUEF Field', () => {
         }
 
         const field = new Field(spec, '', 'default')
-        expect(field.toString()).toEqual(toWin874('t110DEFAULT   '))
+        expect(field.toString()).toEqual('t110DEFAULT   ')
       })
       it('Converts val to toef string', () => {
         const spec = {
@@ -82,7 +81,7 @@ describe('TUEF Field', () => {
         }
 
         const field = new Field(spec, 'heLLo')
-        expect(field.toString()).toEqual(toWin874('t110HELLO     '))
+        expect(field.toString()).toEqual('t110HELLO     ')
       })
       it('Returns empty string if field is optional and val is empty', () => {
         const spec = {
@@ -106,9 +105,9 @@ describe('TUEF Field', () => {
         }
 
         const field = new Field(spec, '', 'default')
-        expect(field.toString('fixed')).toEqual(toWin874('DEFAULT   '))
+        expect(field.toString('fixed')).toEqual('DEFAULT   ')
       })
-      it('Converts val to uppercase for A and AN', () => {
+      it('Converts val to toef string', () => {
         const spec = {
           name: 'test',
           type: 'A',
@@ -117,7 +116,7 @@ describe('TUEF Field', () => {
         }
 
         const field = new Field(spec, 'heLLo')
-        expect(field.toString('fixed')).toEqual(toWin874('HELLO     '))
+        expect(field.toString('fixed')).toEqual('HELLO     ')
       })
       it('Returns empty string if field is optional and val is empty', () => {
         const spec = {
