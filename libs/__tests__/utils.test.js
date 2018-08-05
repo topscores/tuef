@@ -1,3 +1,4 @@
+import iconv from 'iconv-lite'
 import {
   isValidDate,
   isValueAvailable,
@@ -113,7 +114,7 @@ describe('utils', () => {
     it('Convert characters to latin1 encoding with win874 charset', () => {
       const str = 'test ทดสอบ'
       const win874 = toWin874(str)
-      expect(win874).toEqual('test ·´ÊÍº')
+      expect(win874).toEqual(iconv.encode(str, 'win874'))
     })
   })
 })

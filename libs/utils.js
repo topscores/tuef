@@ -53,6 +53,5 @@ export const isArray = val => {
 // Convert utf8 string to latin1 encoding with win874 charset
 export const toWin874 = str => {
   const win874 = iconv.encode(str, 'win874')
-  const buffer = Buffer.from(win874)
-  return buffer.toString('latin1')
+  return win874
 }
