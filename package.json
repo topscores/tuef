@@ -2,6 +2,7 @@
   "name": "tuef",
   "version": "1.0.15",
   "main": "./dist/tuef.js",
+  "types": "./tuef.d.ts",
   "repository": "git@github.com:topscores/tuef.git",
   "author": "Arnupharp Viratanapanu <arnupharp@larngeartech.com>",
   "license": "MIT",
