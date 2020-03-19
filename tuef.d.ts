@@ -6,7 +6,7 @@ declare module "tuef" {
     length: number;
     val?: number;
     mapKey?: string;
-    mapFunc?: function;
+    mapFunc?: any;
     required?: boolean;
     defaultVal?: any;
   }
@@ -17,7 +17,7 @@ declare module "tuef" {
     length?: number;
     val?: number;
     mapKey?: string;
-    mapFunc?: function;
+    mapFunc?: any;
     required?: boolean;
     defaultVal?: any;
   }
