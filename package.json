@@ -1,6 +1,6 @@
 {
   "name": "tuef",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": "./dist/tuef.js",
   "types": "./tuef.d.ts",
   "repository": "git@github.com:topscores/tuef.git",
